@@ -1,0 +1,13 @@
+{
+  "intents": [
+    {
+      "intent": "AskMagicEightBall",
+      "slots": [
+        {
+          "name": "Question",
+          "type": "AMAZON.LITERAL"
+        }
+      ]
+    }
+  ]
+}
