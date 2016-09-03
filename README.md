@@ -50,7 +50,7 @@ To simply build the JAR without interacting with AWS:
 
 ```
 sbt compile
-sbt assemble
+sbt assembly
 ```
 
 The intent schema and sample utterances for the Alexa skill are located in
