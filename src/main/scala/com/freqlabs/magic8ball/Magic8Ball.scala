@@ -19,7 +19,7 @@ package com.freqlabs.magic8ball
 import scala.util.Random
 
 object Magic8Ball {
-    val responses = Array(
+    private val responses = Array(
         "It is certain",
         "It is decidedly so",
         "Without a doubt",

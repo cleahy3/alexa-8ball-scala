@@ -25,12 +25,7 @@ import com.amazon.speech.speechlet.{
 import com.amazon.speech.ui.PlainTextOutputSpeech
 
 class Magic8BallSpeechlet extends Speechlet {
-
-    def logInvocation(name: String, request: SpeechletRequest, session: Session) = {
-        val requestId = request.getRequestId
-        val sessionId = session.getSessionId
-        println(s"$name requestId=$requestId sessionId=$sessionId")
-    }
+    import Magic8BallSpeechlet._
 
     override def onSessionStarted(request: SessionStartedRequest, session: Session) = {
         logInvocation("onSessionStarted", request, session)
@@ -61,5 +56,13 @@ class Magic8BallSpeechlet extends Speechlet {
 
     override def onSessionEnded(request: SessionEndedRequest, session: Session) = {
         logInvocation("onSessionEnded", request, session)
+    }
+}
+
+object Magic8BallSpeechlet {
+    private def logInvocation(name: String, request: SpeechletRequest, session: Session) = {
+        val requestId = request.getRequestId
+        val sessionId = session.getSessionId
+        println(s"$name requestId=$requestId sessionId=$sessionId")
     }
 }
