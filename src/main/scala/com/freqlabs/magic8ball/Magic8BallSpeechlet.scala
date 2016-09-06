@@ -24,10 +24,10 @@ import com.amazon.speech.speechlet.{
   SessionEndedRequest,
   SessionStartedRequest,
   Speechlet,
-  SpeechletRequest,
-  SpeechletResponse
+  SpeechletRequest
 }
-import com.amazon.speech.ui.PlainTextOutputSpeech
+import com.freqlabs.speech.speechlet.SpeechletResponse
+import com.freqlabs.speech.ui.PlainTextOutputSpeech
 
 class Magic8BallSpeechlet extends Speechlet {
   import Magic8BallSpeechlet._
@@ -39,24 +39,18 @@ class Magic8BallSpeechlet extends Speechlet {
   override def onLaunch(request: LaunchRequest, session: Session): SpeechletResponse = {
     logInvocation("onLaunch", request, session)
 
-    val outputSpeech = new PlainTextOutputSpeech
-    outputSpeech.setText("What do you want to know?")
+    val outputSpeech = new PlainTextOutputSpeech("What do you want to know?")
 
-    SpeechletResponse.newTellResponse(outputSpeech)
+    new SpeechletResponse(outputSpeech)
   }
 
   override def onIntent(request: IntentRequest, session: Session): SpeechletResponse = {
     logInvocation("onIntent", request, session)
 
     val answer = Magic8Ball.ask()
+    val outputSpeech = new PlainTextOutputSpeech(answer)
 
-    val outputSpeech = new PlainTextOutputSpeech
-    outputSpeech.setText(answer)
-
-    val response = SpeechletResponse.newTellResponse(outputSpeech)
-    response.setShouldEndSession(true)
-
-    response
+    new SpeechletResponse(outputSpeech)
   }
 
   override def onSessionEnded(request: SessionEndedRequest, session: Session): Unit = {
