@@ -18,51 +18,56 @@ package com.freqlabs.magic8ball
 
 import com.amazon.speech.slu.Intent
 import com.amazon.speech.speechlet.{
-    IntentRequest, LaunchRequest,
-    Session, SessionEndedRequest, SessionStartedRequest,
-    Speechlet, SpeechletRequest, SpeechletResponse
+  IntentRequest,
+  LaunchRequest,
+  Session,
+  SessionEndedRequest,
+  SessionStartedRequest,
+  Speechlet,
+  SpeechletRequest,
+  SpeechletResponse
 }
 import com.amazon.speech.ui.PlainTextOutputSpeech
 
 class Magic8BallSpeechlet extends Speechlet {
-    import Magic8BallSpeechlet._
+  import Magic8BallSpeechlet._
 
-    override def onSessionStarted(request: SessionStartedRequest, session: Session) = {
-        logInvocation("onSessionStarted", request, session)
-    }
+  override def onSessionStarted(request: SessionStartedRequest, session: Session): Unit = {
+    logInvocation("onSessionStarted", request, session)
+  }
 
-    override def onLaunch(request: LaunchRequest, session: Session): SpeechletResponse = {
-        logInvocation("onLaunch", request, session)
+  override def onLaunch(request: LaunchRequest, session: Session): SpeechletResponse = {
+    logInvocation("onLaunch", request, session)
 
-        val outputSpeech = new PlainTextOutputSpeech
-        outputSpeech.setText("What do you want to know?")
+    val outputSpeech = new PlainTextOutputSpeech
+    outputSpeech.setText("What do you want to know?")
 
-        return SpeechletResponse.newTellResponse(outputSpeech)
-    }
+    SpeechletResponse.newTellResponse(outputSpeech)
+  }
 
-    override def onIntent(request: IntentRequest, session: Session): SpeechletResponse = {
-        logInvocation("onIntent", request, session)
+  override def onIntent(request: IntentRequest, session: Session): SpeechletResponse = {
+    logInvocation("onIntent", request, session)
 
-        val answer = Magic8Ball.ask()
+    val answer = Magic8Ball.ask()
 
-        val outputSpeech = new PlainTextOutputSpeech
-        outputSpeech.setText(answer)
+    val outputSpeech = new PlainTextOutputSpeech
+    outputSpeech.setText(answer)
 
-        val response = SpeechletResponse.newTellResponse(outputSpeech)
-        response.setShouldEndSession(true)
+    val response = SpeechletResponse.newTellResponse(outputSpeech)
+    response.setShouldEndSession(true)
 
-        return response
-    }
+    response
+  }
 
-    override def onSessionEnded(request: SessionEndedRequest, session: Session) = {
-        logInvocation("onSessionEnded", request, session)
-    }
+  override def onSessionEnded(request: SessionEndedRequest, session: Session): Unit = {
+    logInvocation("onSessionEnded", request, session)
+  }
 }
 
 object Magic8BallSpeechlet {
-    private def logInvocation(name: String, request: SpeechletRequest, session: Session) = {
-        val requestId = request.getRequestId
-        val sessionId = session.getSessionId
-        println(s"$name requestId=$requestId sessionId=$sessionId")
-    }
+  private def logInvocation(name: String, request: SpeechletRequest, session: Session): Unit = {
+    val requestId = request.getRequestId
+    val sessionId = session.getSessionId
+    println(s"$name requestId=$requestId sessionId=$sessionId")
+  }
 }
