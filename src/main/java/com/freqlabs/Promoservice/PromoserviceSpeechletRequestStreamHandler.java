@@ -21,7 +21,7 @@ import java.util.Set;
 
 import com.amazon.speech.speechlet.lambda.SpeechletRequestStreamHandler;
 
-import com.freqlabs.magic8ball.Magic8BallSpeechlet;
+import com.freqlabs.Promoservice.PromoServiceSpeechlet;
 
 /*
  * Handler: com.freqlabs.magic8ball.Magic8BallSpeechletRequestStreamHandler
@@ -33,8 +33,8 @@ public class Magic8BallSpeechletRequestStreamHandler extends SpeechletRequestStr
 		//supportedApplicationIds.add("");
 	}
 
-	public Magic8BallSpeechletRequestStreamHandler() {
-		super(new Magic8BallSpeechlet(), supportedApplicationIds);
+	public PromoServiceSpeechletRequestStreamHandler() {
+		super(new PromoServiceSpeechlet(), supportedApplicationIds);
 	}
 }
 

@@ -29,8 +29,8 @@ import com.amazon.speech.speechlet.{
 import com.freqlabs.speech.speechlet.SpeechletResponse
 import com.freqlabs.speech.ui.PlainTextOutputSpeech
 
-class Magic8BallSpeechlet extends Speechlet {
-  import Magic8BallSpeechlet._
+class PromoServiceSpeechlet extends Speechlet {
+  import PromoServiceSpeechlet._
 
   override def onSessionStarted(request: SessionStartedRequest, session: Session): Unit = {
     logInvocation("onSessionStarted", request, session)
@@ -58,7 +58,7 @@ class Magic8BallSpeechlet extends Speechlet {
   }
 }
 
-object Magic8BallSpeechlet {
+object PromoServiceSpeechlet {
   private def logInvocation(name: String, request: SpeechletRequest, session: Session): Unit = {
     val requestId = request.getRequestId
     val sessionId = session.getSessionId
